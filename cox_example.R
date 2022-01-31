@@ -33,9 +33,9 @@ data <- data %>%
 fit <- coxph(Surv(time1, time2, status) ~ x_ortho + a + a_lag1, data = data)
 summary(fit)
 
-reps <- 50
+reps <- 250
 set.seed(333)
-n <- 10000
+n <- 2000
 out <- data.frame()
 t1 <- Sys.time()
 for(beta2 in c(0, .5, 1.1, 1.8, 3.1)) {
