@@ -6,17 +6,6 @@ library(rsample)
 data(haartdat)
 head(haartdat)
 
-graphics.off()
-ipwplot(weights = temp$ipw.weights, timevar = haartdat$fuptime,
-        binwidth = 100, ylim = c(-1.5, 1.5), main = "Stabilized inverse probability weights")
-
-summary(coxph(Surv(tstart, fuptime, event) ~ haartind + cluster(patient),
-              data = haartdat, weights = temp$ipw.weights))
-
-summary(coxph(Surv(tstart, fuptime, event) ~ haartind, data = haartdat))
-
-
-
 #orthogonalization
 hist(haartdat$cd4.sqrt)
 
@@ -60,8 +49,8 @@ summary(coxph(Surv(tstart, fuptime, event) ~ haartind_lag1 + cluster(patient),
 ipw_beta_full <- summary(coxph(Surv(tstart, fuptime, event) ~ haartind + cluster(patient),
                                data = dat2, weights = temp$ipw.weights))$coeff[1]
 
-summary(coxph(Surv(tstart, fuptime, event) ~ haartind_lag1 + cd4.baseline + cluster(patient),
-              data = dat2, weights = temp$ipw.weights * temp2$ipw.weights))
+summary(coxph(Surv(tstart, fuptime, event) ~ haartind + cluster(patient),
+             data = dat2, weights = temp$ipw.weights))
 
 
 
@@ -133,7 +122,7 @@ ortho_boot <- qplot(out2[, 2]) +
   geom_vline(xintercept = ortho_beta_full, color = "blue") +
   theme_bw(base_size = 11) + 
   xlim(c(-5, 2)) +
-  labs(x = "Ortho estimate") +
+  labs(x = "RWR estimate") +
   theme(aspect.ratio = 1) + 
   theme(plot.title = element_text(size=11))
 ortho_boot

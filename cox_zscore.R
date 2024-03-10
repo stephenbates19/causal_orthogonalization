@@ -90,13 +90,13 @@ for(beta_xa in c(0, .25, .5)) {
     }
   }
 }
-colnames(out) <- c("tx_effect", "beta_xa", "ortho", "IPW")
+colnames(out) <- c("tx_effect", "beta_xa", "RWR", "IPW")
 head(out)
 
 save(out, file = "data/cox_zscore.RData")
 load(file = "data/cox_zscore.RData")
 
-plt_dat <- pivot_longer(out, cols = c("ortho", "IPW")) %>%
+plt_dat <- pivot_longer(out, cols = c("RWR", "IPW")) %>%
   group_by(tx_effect, beta_xa, name) %>%
   mutate(zscore = value / sd(value))
 

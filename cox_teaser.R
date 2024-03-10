@@ -52,8 +52,8 @@ plt2 <- ggplot(data.frame("rhos" = rhos, "betas_naive" = betas, "betas_ortho" = 
   geom_hline(yintercept = 0, color = "dark gray") +
   geom_line(aes(x = rhos, y = betas_naive, color = "naive")) + 
   geom_point(aes(x = rhos, y = betas_naive, color = "naive", shape = "naive")) +
-  geom_line(aes(x = rhos, y = betas_ortho, color = "ortho")) + 
-  geom_point(aes(x = rhos, y = betas_ortho, color = "ortho", shape = "ortho")) +
+  geom_line(aes(x = rhos, y = betas_ortho, color = "RWR")) + 
+  geom_point(aes(x = rhos, y = betas_ortho, color = "RWR", shape = "RWR")) +
   labs(x = TeX("$$A_1 \\rightarrow$$ $$X_2$$ correlation"), y = TeX("$$A_1$$ coefficient"), 
        shape = "Method", color = "Method", title = "Cox Regression") +
   theme_bw(base_size = 10) +

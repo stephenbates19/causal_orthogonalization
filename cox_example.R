@@ -1,8 +1,9 @@
 library(foreach)
 library(survival)
 library(tidyverse)
-library(ggplot)
+library(ggplot2)
 library(ipw)
+library(latex2exp)
 
 #data simulator
 source("cox_simulator.R")
@@ -65,6 +66,8 @@ print(Sys.time() - t1)
 colnames(out) <- c("ax_effect", "ax_cor", "naive_aavg", "naive_xavg", "ortho_aavg", "ortho_xavg")
 save(out, file = "data/cox_example.RData")
 
+load(file = "data/cox_example.RData")
+
 out2 <- out %>%
   group_by(ax_effect) %>%
   summarize(ax_cor = mean(ax_cor),
@@ -76,8 +79,8 @@ out2 <- out %>%
 plt <- ggplot(data = out2, aes(x = ax_cor)) + 
   geom_point(aes(y = naive_aavg, color = "naive", shape = "naive")) + 
   geom_line(aes(y = naive_aavg, color = "naive")) + 
-  geom_point(aes(y = ortho_aavg, color = "ortho", shape = "ortho")) + 
-  geom_line(aes(y = ortho_aavg, color = "ortho")) + 
+  geom_point(aes(y = ortho_aavg, color = "RWR", shape = "RWR")) + 
+  geom_line(aes(y = ortho_aavg, color = "RWR")) + 
   geom_hline(yintercept = 0) +
   labs(x = TeX("$$A_t \\rightarrow$$ $$X_{t+1}$$ correlation"), 
        y = "Regression coefficient", shape = "Method", color = "Method") +

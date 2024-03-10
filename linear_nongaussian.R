@@ -81,8 +81,8 @@ results
 plt <- ggplot(results, aes(x = ax_effect)) + 
   geom_point(aes(y = naive_coef, color = "naive", shape = "naive")) +
   geom_line(aes(y = naive_coef, color = "naive")) + 
-  geom_point(aes(y = ortho_coef, color = "ortho", shape = "ortho")) +
-  geom_line(aes(y = ortho_coef, color = "ortho")) + 
+  geom_point(aes(y = ortho_coef, color = "RWR", shape = "RWR")) +
+  geom_line(aes(y = ortho_coef, color = "RWR")) + 
   geom_hline(yintercept = 0) + 
   theme_bw(base_size = 10) +
   labs(x = TeX("$$A_t \\rightarrow$$ $$X_{t+1}$$ correlation"), 
